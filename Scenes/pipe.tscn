@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://bg85wdoqu5o44"]
+
+[ext_resource type="Script" uid="uid://d0pwktxwl2ff" path="res://Scripts/pipe.gd" id="1_6svvj"]
+[ext_resource type="Texture2D" uid="uid://dfls16g64ivcr" path="res://Assets/Sprites/arana-Sheet.png" id="2_6svvj"]
+[ext_resource type="Texture2D" uid="uid://dtujhmxhhk7ug" path="res://Assets/Sprites/web.png" id="3_6yjks"]
+[ext_resource type="Texture2D" uid="uid://vleoowt7mm8k" path="res://Assets/Sprites/jaca-Sheet.png" id="4_6svvj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6svvj"]
+size = Vector2(60, 1283)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxnld"]
+size = Vector2(60, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vpko"]
+atlas = ExtResource("2_6svvj")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yv37f"]
+atlas = ExtResource("2_6svvj")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fohhe"]
+atlas = ExtResource("2_6svvj")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md2nm"]
+atlas = ExtResource("2_6svvj")
+region = Rect2(150, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0gew"]
+atlas = ExtResource("2_6svvj")
+region = Rect2(200, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8w52q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vpko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yv37f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fohhe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md2nm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0gew")
+}],
+"loop": true,
+"name": &"blush",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yjks"]
+atlas = ExtResource("4_6svvj")
+region = Rect2(0, 0, 52, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxnld"]
+atlas = ExtResource("4_6svvj")
+region = Rect2(52, 0, 52, 52)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1vpko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yjks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxnld")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6yjks"]
+size = Vector2(109, 142.36116)
+
+[node name="Pipe" type="Area2D" unique_id=1589667949 groups=["pipes"]]
+script = ExtResource("1_6svvj")
+pipe_speed = 850
+
+[node name="AranaCollision" type="CollisionShape2D" parent="." unique_id=411881546]
+position = Vector2(442, -406.5)
+shape = SubResource("RectangleShape2D_6svvj")
+
+[node name="JacaCollision" type="CollisionShape2D" parent="." unique_id=1998424256]
+position = Vector2(448, 921)
+shape = SubResource("RectangleShape2D_wxnld")
+
+[node name="Arana" type="Sprite2D" parent="." unique_id=2001917481]
+position = Vector2(182, -128)
+
+[node name="Spider" type="AnimatedSprite2D" parent="Arana" unique_id=1779883940]
+position = Vector2(266, 298.00003)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_8w52q")
+animation = &"blush"
+autoplay = "blush"
+frame = 2
+frame_progress = 0.6535105
+
+[node name="Web" type="Sprite2D" parent="Arana" unique_id=1385393961]
+position = Vector2(266, -161)
+scale = Vector2(4, 15.4)
+texture = ExtResource("3_6yjks")
+
+[node name="Jacare" type="Sprite2D" parent="." unique_id=238740820]
+position = Vector2(186, -261)
+
+[node name="Jaca" type="AnimatedSprite2D" parent="Jacare" unique_id=515388109]
+position = Vector2(256.00003, 784.00006)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_1vpko")
+autoplay = "default"
+frame_progress = 0.54119533
+
+[node name="Jaca2" type="Sprite2D" parent="Jacare" unique_id=1712399881]
+position = Vector2(254.5, 1055)
+scale = Vector2(3.8200002, 342.143)
+texture = ExtResource("4_6svvj")
+region_enabled = true
+region_rect = Rect2(0, 49, 50, 1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=183023285]
+position = Vector2(581, 318)
+
+[node name="Gap" type="Area2D" parent="." unique_id=197442784]
+position = Vector2(-6, 908)
+scale = Vector2(1, 1.44)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gap" unique_id=294670373]
+position = Vector2(498, -395.48615)
+shape = SubResource("RectangleShape2D_6yjks")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="Gap" to="." method="_on_gap_body_entered"]

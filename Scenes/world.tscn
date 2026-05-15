@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://da8k603frh2aw"]
+
+[ext_resource type="Script" uid="uid://bqrlbgm3sk5kn" path="res://Scripts/world.gd" id="1_5a7ea"]
+[ext_resource type="PackedScene" uid="uid://bqjm4vcka2odq" path="res://Scenes/capybara.tscn" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://bg85wdoqu5o44" path="res://Scenes/pipe.tscn" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://xmqpqdbykpc4" path="res://Scenes/background.tscn" id="3_o06y3"]
+[ext_resource type="PackedScene" uid="uid://dse2xe8nfmnes" path="res://Scenes/boundary.tscn" id="4_8j60k"]
+[ext_resource type="FontFile" uid="uid://c46pg43a0hxyb" path="res://Assets/Fonts/Sixtyfour-Regular-VariableFont_BLED,SCAN.ttf" id="5_fo5ed"]
+[ext_resource type="PackedScene" uid="uid://btjnugn7m5ymq" path="res://Scenes/death_screen_ui.tscn" id="11_ikia7"]
+
+[node name="World" type="Node" unique_id=1972933139]
+script = ExtResource("1_5a7ea")
+pipe_scene = ExtResource("2_go701")
+
+[node name="Background" parent="." unique_id=1722455963 instance=ExtResource("3_o06y3")]
+
+[node name="Srite2D" parent="Background/j4" parent_id_path=PackedInt32Array(1722455963, 1945583474) index="0" unique_id=915766584]
+position = Vector2(576, 320)
+scale = Vector2(0.6, 0.60740745)
+
+[node name="Srite2D" parent="Background/j3" parent_id_path=PackedInt32Array(1722455963, 760962829) index="0" unique_id=1491508032]
+position = Vector2(576, 320)
+scale = Vector2(0.3, 0.60740733)
+
+[node name="Srite2D" parent="Background/j2" parent_id_path=PackedInt32Array(1722455963, 563243978) index="0" unique_id=898897480]
+position = Vector2(575.99994, 319)
+scale = Vector2(0.19999999, 0.6055556)
+
+[node name="Srite2D" parent="Background/j1" parent_id_path=PackedInt32Array(1722455963, 593965024) index="0" unique_id=1212832261]
+position = Vector2(576, 319)
+scale = Vector2(0.14999999, 0.6055556)
+
+[node name="Capybara" parent="." unique_id=1831971833 instance=ExtResource("1_a02cp")]
+position = Vector2(248, 320)
+
+[node name="PipeTimer" type="Timer" parent="." unique_id=915584382]
+
+[node name="Boundary" parent="." unique_id=127665141 instance=ExtResource("4_8j60k")]
+position = Vector2(280, 648)
+
+[node name="Boundary2" parent="." unique_id=521483854 instance=ExtResource("4_8j60k")]
+position = Vector2(200, -192)
+rotation = 3.1415927
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=983983708]
+position = Vector2(576, 320)
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=671780102]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -270.0
+offset_right = 270.0
+offset_bottom = 120.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("5_fo5ed")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeathScreenUI" parent="." unique_id=1223422345 instance=ExtResource("11_ikia7")]
+visible = false
+z_index = 1
+
+[node name="TutorialLabel" type="Label" parent="." unique_id=88329304]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -124.0
+offset_right = 144.0
+offset_bottom = -101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_fo5ed")
+text = "Press SPACE to fly"
+
+[connection signal="death" from="Capybara" to="." method="_on_capybara_death"]
+[connection signal="get_score" from="Capybara" to="." method="_on_capybara_get_score"]
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
+
+[editable path="Background"]

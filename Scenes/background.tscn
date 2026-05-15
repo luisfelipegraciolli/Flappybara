@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://xmqpqdbykpc4"]
+
+[ext_resource type="Texture2D" uid="uid://cuv3ratdls15i" path="res://Assets/Sprites/Background/j4.png" id="1_xgxeb"]
+[ext_resource type="Texture2D" uid="uid://b4hexfb75qtdg" path="res://Assets/Sprites/Background/j3.png" id="2_ltlj5"]
+[ext_resource type="Texture2D" uid="uid://o4rod7cd4sr2" path="res://Assets/Sprites/Background/j2.png" id="3_rymcx"]
+[ext_resource type="Texture2D" uid="uid://i65wtphp1u88" path="res://Assets/Sprites/Background/j1.png" id="4_42s4r"]
+
+[node name="ParallaxBackground" type="Node2D" unique_id=1775980084]
+modulate = Color(0.2643467, 0.0008445984, 0.48710608, 1)
+
+[node name="j4" type="Parallax2D" parent="." unique_id=1945583474]
+scroll_scale = Vector2(0, 1)
+repeat_size = Vector2(1152, 0)
+autoscroll = Vector2(-100, 0)
+ignore_camera_scroll = true
+
+[node name="Srite2D" type="Sprite2D" parent="j4" unique_id=915766584]
+position = Vector2(589.60004, 325.00003)
+scale = Vector2(0.61083335, 0.59814817)
+texture = ExtResource("1_xgxeb")
+
+[node name="j3" type="Parallax2D" parent="." unique_id=760962829]
+scroll_scale = Vector2(-0.2, 1)
+repeat_size = Vector2(1152, 0)
+autoscroll = Vector2(-100, 0)
+ignore_camera_scroll = true
+
+[node name="Srite2D" type="Sprite2D" parent="j3" unique_id=1491508032]
+position = Vector2(575.99994, 324)
+scale = Vector2(0.29999998, 0.6)
+texture = ExtResource("2_ltlj5")
+
+[node name="j2" type="Parallax2D" parent="." unique_id=563243978]
+scroll_scale = Vector2(-0.5, 1)
+repeat_size = Vector2(1152, 0)
+autoscroll = Vector2(-100, 0)
+ignore_camera_scroll = true
+
+[node name="Srite2D" type="Sprite2D" parent="j2" unique_id=898897480]
+position = Vector2(575.99994, 324)
+scale = Vector2(0.19947916, 0.5962963)
+texture = ExtResource("3_rymcx")
+
+[node name="j1" type="Parallax2D" parent="." unique_id=593965024]
+scroll_scale = Vector2(-1, 1)
+repeat_size = Vector2(1152, 0)
+autoscroll = Vector2(-100, 0)
+
+[node name="Srite2D" type="Sprite2D" parent="j1" unique_id=1212832261]
+position = Vector2(575.99994, 324)
+scale = Vector2(0.15039064, 0.5962963)
+texture = ExtResource("4_42s4r")

@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://bqjm4vcka2odq"]
+
+[ext_resource type="Script" uid="uid://d0qlh5nb16tcw" path="res://Scripts/capybara.gd" id="1_8440m"]
+[ext_resource type="Texture2D" uid="uid://ciqfy061amwou" path="res://Assets/Sprites/capy-Sheet.png" id="2_7aixm"]
+[ext_resource type="AudioStream" uid="uid://dsgkbya7et7lp" path="res://Assets/Music&SFX/jump.wav" id="3_lf7ec"]
+[ext_resource type="AudioStream" uid="uid://byvbgaxtani7f" path="res://Assets/Music&SFX/hitHurt.wav" id="4_7aixm"]
+[ext_resource type="AudioStream" uid="uid://d1g426fusht8p" path="res://Assets/Music&SFX/score.wav" id="5_5uon1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uon1"]
+atlas = ExtResource("2_7aixm")
+region = Rect2(0, 0, 49, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj82j"]
+atlas = ExtResource("2_7aixm")
+region = Rect2(49, 0, 49, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uwqlm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uon1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj82j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uon1")
+}],
+"loop": false,
+"name": &"flap",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nyswe"]
+size = Vector2(99, 37)
+
+[sub_resource type="Animation" id="Animation_7aixm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5uon1"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -2.6179938779914944]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nj82j"]
+_data = {
+&"RESET": SubResource("Animation_7aixm"),
+&"death": SubResource("Animation_5uon1")
+}
+
+[node name="Capybara" type="CharacterBody2D" unique_id=1831971833]
+script = ExtResource("1_8440m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=101928486]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_uwqlm")
+animation = &"flap"
+frame = 2
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1733082277]
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectangleShape2D_nyswe")
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=111078801]
+stream = ExtResource("3_lf7ec")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=651967802]
+stream = ExtResource("4_7aixm")
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="." unique_id=1392960197]
+stream = ExtResource("5_5uon1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791354658]
+libraries/ = SubResource("AnimationLibrary_nj82j")
